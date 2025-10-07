@@ -139,7 +139,7 @@ $res = $conn->query("SELECT id, username, full_name, email, role, blocked, creat
         <div class="col-md-2">
           <label class="form-label">Role</label>
           <select name="role" class="form-select">
-            <option value="customer">Customer</option>
+          <!--  <option value="customer">Customer</option> -->
             <option value="admin">Admin</option>
           </select>
         </div>

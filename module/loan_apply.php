@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <select name="car_id" id="car_id" class="form-select" required>
             <option value="">Select car</option>
             <?php foreach ($cars as $c): ?>
-              <option value="<?php echo $c['id']; ?>" data-price="<?php echo $c['price']; ?>"><?php echo htmlspecialchars($c['model']); ?> - $<?php echo number_format($c['price'],2); ?></option>
+              <option value="<?php echo $c['id']; ?>" data-price="<?php echo $c['price']; ?>"><?php echo htmlspecialchars($c['model']); ?> <!-- - ₱<?php echo number_format($c['price'],2); ?> --> </option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="col-md-4">
           <label class="form-label">Down Payment</label>
           <input type="number" step="0.01" class="form-control" name="down_payment" id="down_payment" value="0" readonly>
+          <small class="text-muted">Auto-calculated based on loan term</small>
         </div>
         <div class="col-md-4">
           <label class="form-label">Annual Interest Rate (%)</label>
@@ -66,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="col-12">
           <div class="alert alert-secondary" id="emiPreview">
+            <div><strong>Down Payment:</strong> ₱0</div>
             <div><strong>Total Interest:</strong> ₱0</div>
             <div><strong>Total Loan with Interest:</strong> ₱0</div>
             <div><strong>Monthly Installment:</strong> ₱0</div>
@@ -95,8 +97,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (months >= 36) rate = 30; else if (months >= 24) rate = 20; else rate = 10;
     rateEl.value = rate;
   }
+  function calculateDownPayment(){
+    const price = parseFloat(priceEl.value)||0;
+    const months = parseInt(monthsEl.value)||0;
+    let downPaymentPercentage = 0;
+    
+    // Down payment calculation based on loan term
+    if (months === 12) {
+      downPaymentPercentage = 0.20; // 20% for 1 year
+    } else if (months === 24) {
+      downPaymentPercentage = 0.15; // 15% for 2 years
+    } else if (months === 36) {
+      downPaymentPercentage = 0.10; // 10% for 3 years
+    }
+    
+    const downPayment = price * downPaymentPercentage;
+    downEl.value = Math.round(downPayment);
+  }
   function calc(){
     syncRateWithTerm();
+    calculateDownPayment();
     const price = parseFloat(priceEl.value)||0;
     const down = parseFloat(downEl.value)||0;
     const rate = parseFloat(rateEl.value)||0; // annual %
@@ -106,7 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     const totalInterest = principal * (rate/100.0) * years;
     const totalLoanWithInterest = principal + totalInterest;
     const monthlyInstallment = months>0 ? (totalLoanWithInterest / months) : 0;
-    emiEl.innerHTML = '<div><strong>Total Interest:</strong> ' + formatPHP(totalInterest) + '</div>'+
+    emiEl.innerHTML = '<div><strong>Down Payment:</strong> ' + formatPHP(down) + '</div>'+
+                      '<div><strong>Total Interest:</strong> ' + formatPHP(totalInterest) + '</div>'+
                       '<div><strong>Total Loan with Interest:</strong> ' + formatPHP(totalLoanWithInterest) + '</div>'+
                       '<div><strong>Monthly Installment:</strong> ' + formatPHP(monthlyInstallment) + '</div>';
   }

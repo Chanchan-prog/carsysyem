@@ -120,4 +120,26 @@ function mark_emi_paid($emiId, $method = 'manual') {
         return false;
     }
 }
+
+function mark_emi_unpaid($emiId) {
+    global $conn;
+    $conn->begin_transaction();
+    try {
+        // Update EMI status to 'due' and clear paid_at
+        $stmt = $conn->prepare("UPDATE emis SET status='due', paid_at=NULL WHERE id=? AND status='paid'");
+        $stmt->bind_param("i", $emiId);
+        $stmt->execute();
+        
+        // Remove the corresponding payment record
+        $stmt2 = $conn->prepare("DELETE FROM payments WHERE emi_id=?");
+        $stmt2->bind_param("i", $emiId);
+        $stmt2->execute();
+        
+        $conn->commit();
+        return true;
+    } catch (Exception $e) {
+        $conn->rollback();
+        return false;
+    }
+}
 ?>

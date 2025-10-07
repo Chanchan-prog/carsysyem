@@ -17,7 +17,7 @@
 
           // Helpers for formatted values
           $fmtInt = function ($n) { return number_format((int)$n); };
-          $fmtMoney = function ($n) { return '$' . number_format((float)$n, 2); };
+          $fmtMoney = function ($n) { return '₱' . number_format((float)$n, 2); };
 
           $isAdmin = ($u['role'] ?? '') === 'admin';
 

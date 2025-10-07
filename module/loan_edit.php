@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label class="form-label">Car</label>
           <select name="car_id" class="form-select" required>
             <?php foreach ($cars as $c): ?>
-              <option value="<?php echo $c['id']; ?>" <?php echo $c['id']==$loan['car_id']?'selected':''; ?>><?php echo htmlspecialchars($c['model']); ?> - $<?php echo number_format($c['price'],2); ?></option>
+              <option value="<?php echo $c['id']; ?>" <?php echo $c['id']==$loan['car_id']?'selected':''; ?>><?php echo htmlspecialchars($c['model']); ?> - ₱<?php echo number_format($c['price'],2); ?></option>
             <?php endforeach; ?>
           </select>
         </div>

@@ -26,7 +26,7 @@
       box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
       padding: 40px;
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
     }
     .login-card h2 {
       margin-bottom: 25px;
@@ -41,6 +41,9 @@
     .form-control:focus {
       border-color: #00b4d8;
       box-shadow: none;
+    }
+    .form-control::placeholder {
+      color: #adb5bd;
     }
     .btn-login {
       background: #00b4d8;
@@ -112,9 +115,9 @@
       </div>
       <div class="d-flex align-items-center mb-3">
         <input type="checkbox" id="remember_me">
-        <label for="remember_me" class="text-light">Remember Me!</label>
+        <label for="remember_me" class="text-light ms-2">Remember Me</label>
       </div>
-      <button type="submit" class="btn btn-login w-100 mb-2">Sign in</button>
+      <button type="submit" class="btn btn-login w-100 mb-2">Sign In</button>
     </form>
     <div class="mt-2"><a href="register.php" class="text-decoration-none" style="color:#00b4d8">Create an account</a></div>
   </div>

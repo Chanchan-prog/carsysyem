@@ -90,6 +90,85 @@
       </li>
     <?php endif; ?>
 
+    <?php if ($role === 'customer'): ?>
+    <!-- Customer Features Section -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#customer-features-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-gear"></i><span>My Account</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="customer-features-nav"
+          class="nav-content collapse <?php echo in_array($_GET['page'] ?? '', ['notifications','documents']) ? 'show' : ''; ?>"
+          data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="index.php?page=notifications" class="<?php echo ($_GET['page'] ?? '') === 'notifications' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>My Notifications</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.php?page=documents" class="<?php echo ($_GET['page'] ?? '') === 'documents' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>My Documents</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <?php endif; ?>
+
+    <?php if ($role === 'admin'): ?>
+    <!-- Admin Features Section -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#admin-features-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-gear"></i><span>Features</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="admin-features-nav"
+          class="nav-content collapse <?php echo in_array($_GET['page'] ?? '', ['insurance','maintenance','notifications','documents','reports','receipts','settings']) ? 'show' : ''; ?>"
+          data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="index.php?page=insurance" class="<?php echo ($_GET['page'] ?? '') === 'insurance' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>Insurance</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.php?page=maintenance" class="<?php echo ($_GET['page'] ?? '') === 'maintenance' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>Maintenance</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.php?page=notifications" class="<?php echo ($_GET['page'] ?? '') === 'notifications' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>All Notifications</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.php?page=documents" class="<?php echo ($_GET['page'] ?? '') === 'documents' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>All Documents</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.php?page=reports" class="<?php echo ($_GET['page'] ?? '') === 'reports' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>Reports</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.php?page=receipts" class="<?php echo ($_GET['page'] ?? '') === 'receipts' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>Receipts</span>
+          </a>
+        </li>
+        <li>
+          <a href="index.php?page=settings" class="<?php echo ($_GET['page'] ?? '') === 'settings' ? 'active' : ''; ?>">
+            <i class="bi bi-circle"></i><span>Settings</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <?php endif; ?>
+
+    <!-- Profile -->
+    <li class="nav-item">
+      <a class="nav-link <?php echo ($_GET['page'] ?? '') === 'profile' ? 'active' : ''; ?>" href="index.php?page=profile">
+        <i class="bi bi-person"></i>
+        <span>Profile</span>
+      </a>
+    </li>
+
   </ul>
 </aside><!-- End Sidebar-->
 

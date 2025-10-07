@@ -65,7 +65,7 @@ $res = $conn->query("SELECT l.*, u.full_name, u.username, c.model FROM loans l J
             <td><?php echo $row['id']; ?></td>
             <td><?php echo htmlspecialchars($row['full_name']); ?></td>
             <td><?php echo htmlspecialchars($row['model']); ?></td>
-            <td>$<?php echo number_format($row['principal'],2); ?></td>
+            <td>₱<?php echo number_format($row['principal'],2); ?></td>
             <td><?php echo $row['annual_interest_rate']; ?>%</td>
             <td><?php echo $row['term_months']; ?></td>
             <td><span class="badge bg-<?php echo $row['status']==='approved'?'success':($row['status']==='rejected'?'danger':'warning'); ?>"><?php echo strtoupper($row['status']); ?></span></td>

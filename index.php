@@ -61,6 +61,27 @@ switch ($page) {
     case 'appeal':
         include __DIR__ . '/module/appeals.php';
         break;
+    case 'insurance':
+        include __DIR__ . '/module/insurance.php';
+        break;
+    case 'maintenance':
+        include __DIR__ . '/module/maintenance.php';
+        break;
+    case 'notifications':
+        include __DIR__ . '/module/notifications.php';
+        break;
+    case 'documents':
+        include __DIR__ . '/module/documents.php';
+        break;
+    case 'reports':
+        include __DIR__ . '/module/reports.php';
+        break;
+    case 'receipts':
+        include __DIR__ . '/module/receipts.php';
+        break;
+    case 'settings':
+        include __DIR__ . '/module/settings.php';
+        break;
     case 'logout':   // ✅ Added logout
         session_unset();    // remove all session variables
         session_destroy();  // destroy session
